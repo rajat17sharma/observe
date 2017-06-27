@@ -1,0 +1,150 @@
+<html>
+
+<head>
+    <title>Audio Player</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style type="text/css">
+    #player {
+        width: 30%;
+        position: relative;
+        left: 30%;
+        top: 20%;
+        min-height: 200px;
+        border: solid 1px #d5d5d5;
+        background-color: ghostwhite;
+    }
+    
+    #audioPlayer {
+        /* display: none; */
+        height: 100px;
+        width: 100%;
+        height: 13%;
+        /* border-radius: 115px; */
+        border: solid 1px #d5d5d5;
+        position: relative;
+        margin-top: -57px;
+    }
+    
+    li {
+        display: none;
+    }
+    
+    #but {
+        border-top: solid 2px grey;
+        padding-top: 3%;
+        padding-bottom: 5%
+    }
+    
+    button {
+        margin-left: 15%;
+    }
+    
+    button img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    input[type="text"] {
+        width: 90%;
+        border-radius: 5px;
+    }
+    
+    p {
+        font-weight: bold;
+        font-size: 18px;
+    }
+    
+    #top {
+        background-color: pink;
+        width: 100%;
+        height: 250px;
+    }
+    
+    #top p {
+        text-align: center;
+    }
+    
+    #top img {
+        width: 100%;
+        height: 101%;
+        margin-top: -7%;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="player">
+        <div id="top">
+            <p>Music Player</p>
+            <audio id="audioPlayer" controls src="">
+            </audio>
+            <div>
+                <img src="top_back.gif">
+            </div>
+            <ul id="playlist">
+                <li>
+                    <a href=""></a>
+                </li>
+            </ul>
+            <br>
+        </div>
+        <div id="but">
+            <p>Url:
+                <input type="text" id="link" placeholder="Enter the URL of the song you want to play">
+            </p>
+            <button type="button" id="play"><img src="play.png"></button>
+            <button type="button" id="pause"><img src="pause.png"></button>
+            <button type="button" id="stop"><img src="stop.png"></button>
+        </div>
+    </div>
+    <script type="text/javascript">
+    audioPlayer();
+    var count = 0;
+
+
+    function audioPlayer() {
+        console.log('audio player');
+        // $('#audioPlayer')[0].src = $('#playlist li a')[0];
+
+        $('#playlist li a').click(function(e) {
+            e.preventDefault();
+            $('#audioPlayer')[0].src = this;
+            $('#audioPlayer')[0].play();
+        });
+        $('#play').click(function() {
+            console.log($('#link'));
+            if ($('#link')[0].value == "") {
+                alert('enter URL');
+            }
+            if ($('#link')[0].value != "" && count == 0) {
+                console.log("hello");
+                console.log($('#link')[0].value);
+                $('#playlist li a')[0].href = $('#link')[0].value;
+                var x = $('#playlist li a')[0].href
+                console.log(x);
+                $('#audioPlayer')[0].src = $('#playlist li a')[0];
+                $('#audioPlayer')[0].play();
+                var time1 = document.getElementById('audioPlayer');
+                console.log(time1.currentTime);
+            }
+            if (count > 0) {
+                $('#audioPlayer')[0].play();
+                var time1 = document.getElementById('audioPlayer');
+                console.log(time1.currentTime);
+            }
+        });
+        $('#pause').click(function() {
+            console.log('hello');
+            $("#audioPlayer")[0].pause();
+            console.log($('#audioPlayer')[0].paused);
+            count++;
+        });
+        $('#stop').click(function() {
+            location.reload();
+        })
+
+    }
+    </script>
+</body>
+
+</html>
